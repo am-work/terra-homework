@@ -149,7 +149,7 @@ deploys it to Testnet. Here are some important things to know:
 You may find examples online where both compilation and deployment happen with a
 single `terrain deploy` command (without the `--no-rebuild` flag), but
 unfortunately we couldn't get `terrain` to play nicely with multiple contracts
-in the same repo so for know just stick to running both steps separately.
+in the same repo so for now just stick to running both steps separately.
 
 ### Migrate a smart contract
 
