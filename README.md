@@ -177,7 +177,7 @@ commands instead:
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
 SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm.sh
-npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SGNER --network testnet --config-path config.$CONTRACT_NAME.json
+npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json
 ```
 
 When you migrate a contract like this, the `migrate` Rust method of your
