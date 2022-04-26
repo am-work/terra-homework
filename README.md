@@ -102,7 +102,7 @@ See `contracts/counter/contract.rs` for an example of how to write unit tests
 and mock dependencies. You can also look at open source projects, for example:
 https://github.com/terraswap/terraswap/blob/main/packages/terraswap/src/testing.rs.
 
-### Deploy a smart contract
+### Deploying a smart contract
 
 Once your code seems to be in good shape (it should at least compile and pass
 unit tests), you can deploy it to Testnet. You should only deploy each contract
@@ -149,9 +149,9 @@ deploys it to Testnet. Here are some important things to know:
 You may find examples online where both compilation and deployment happen with a
 single `terrain deploy` command (without the `--no-rebuild` flag), but
 unfortunately we couldn't get `terrain` to play nicely with multiple contracts
-in the same repo so for know just stick to running both steps separately.
+in the same repo so for now just stick to running both steps separately.
 
-### Migrate a smart contract
+### Migrating a smart contract
 
 Migrating a contract is similar to deploying it, but you should use these
 commands instead:
@@ -164,7 +164,7 @@ npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SGNER --netwo
 ```
 
 When you migrate a contract like this, the `migrate` Rust method of your
-contract will be executed (with the new code), giving you a change to update
+contract will be executed (with the new code), giving you a chance to update
 whatever data is stored in the contract to be compatible with the new code.
 
 ### Running scripts inside `scripts/`

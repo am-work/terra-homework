@@ -25,7 +25,8 @@ Read `README.md`!
   https://finder.terra.money/testnet/
 - Find a way to get some Lemon tokens to your wallet (Hint: since you are the
   one deploying the `cw20_token` contract, you control what’s passed to the
-  `InstantiateMsg`; You have two options: 1) use the `initial_balances` field or
+  `InstantiateMsg`, so you have two options: 1) use the `initial_balances` field
+  or
   2) use the `mint` field to declare yourself a minter and mint tokens for your
   personal wallet. After the contract is deployed, you can write a script in
   `scripts/` to call the Mint operation in your contract.)
@@ -61,9 +62,9 @@ enum ExecuteMsg {
 }
 
 enum QueryMsg {
-	// Returns the most recently stored price.
-	// Public endpoint (like all query methods).
-	GetPrice(amount) 
+  // Returns the most recently stored price.
+  // Public endpoint (like all query methods).
+  GetPrice(amount) 
 }
 ```
 
@@ -116,15 +117,15 @@ enum ExecuteMsg {
   // Withdraws Luna that has been accumulated over time from selling Lemons.
   // Sends that Luna to the caller.
   // Private endpoint (only owner can call).
-	WithdrawLuna(amount) 
+  WithdrawLuna(amount) 
 }
 ```
 
 After the contract is deployed, try this:
 
 - Transfer some Lemons into your LemonSwap contract (call the `Transfer` or `Mint` operation on the CW20 contract) to "stock up" the contract. The contract needs to have some Lemons in order to be able to sell them!
-- Ask a friend to buy some of your Lemons (they will provide Luna to your Lemon Swap)
-- Buy some Papayas (or whatever their token is colled) from a friend’s similar Papaya Swap contract.
+- Ask a friend to buy some of your Lemons (they will provide Luna to your Lemon Swap contract)
+- Buy some Papayas (or whatever their token is called) from a friend’s similar Papaya Swap contract.
 
 **End result of this section:**
 
@@ -146,7 +147,7 @@ At this point, you should have 3 contracts deployed:
 
 So far, your Lemon Swap contract is able to automatically sell Lemons in exchange for Luna. Over time, it will accumulate a balance in Luna (especially if you are not calling `WithdrawLuna` frequently). This Luna is safe and yours to keep, but it is just sitting idle inside your contract which is not very productive.
 
-You will now change the Lemon Swap contract to delegate your sitting Luna with a Luna validator. This will be a more productive use to your Luna since your contract will now accrue delegation rewards.
+You will now change the Lemon Swap contract to delegate your sitting Luna with a Luna validator. This will be a more productive use of your Luna since your contract will now accrue delegation rewards.
 
 - Create a new contract in `contracts/swap2`. It's fine to use your existing code from `contracts/swap` as an example.
 - The interface should look something like this:
@@ -191,7 +192,7 @@ enum ExecuteMsg {
         - [`WithdrawDelegatorReward`](https://github.com/prism-finance/prism-contracts-private/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-vault/src/contract.rs#L306)
     
 
-### **HOMEWORK TECHNICALLY ENDS HERE**. Everything below is optional. Don't even consider working on these if you haven't completed and understood all the topics above. These optionals parts are more open-ended and you are mostly on your own.
+### **HOMEWORK TECHNICALLY ENDS HERE**. Everything below is optional. These optional parts are more open-ended and you are mostly on your own. Make sure you have mastered everything above before trying these.
 
 ### (Optional) Stretch: Part 5: Constant Product Automated Market Maker
 
