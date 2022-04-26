@@ -50,6 +50,11 @@ unless explicitly noted otherwise.
   https://rustup.rs/, https://nodejs.org/en/download/package-manager/,
   https://docs.docker.com/get-docker/). You may already have some of these
   installed; that's OK, but make sure you have a recent version.
+* Make sure that you have Rust >= 1.60. You can run your Rust version by running this:
+```
+$ rustc --version
+rustc 1.60.0 (7737e0b5c 2022-04-04)
+```
 * Install Terra-specific tools. We are going to use Testnet (a.k.a. as
   `bombay-12`), so you don't need to worry about LocalTerra if you see it
   mentioned online. Something like this should install everything you need:
@@ -80,7 +85,7 @@ npm install scripts/
 * Copy the file `keys.terrain.js.sample` to `keys.terrain.js`. Then add your new private key to `keys.terrain.js`. Just add a new entry called
   "myKey" (or whatever name you want, really) similar to the keys that are
   already there. You'll need to remember the name "myKey" for later commands.
-  `keys.terrain.js` should NEVER be pushed to public repo (that is why it is in `.gitignore`) to avoid leaking your new private key! You
+  `keys.terrain.js` should NEVER be pushed to a public repo (that is why it is in `.gitignore`) to avoid leaking your new private key! You
   should treat your private key just like a password since anyone that has it
   will be able to take your balance from the blockchain. NEVER publish your
   private keys, even if they are only used on testnet!
