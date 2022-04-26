@@ -1,0 +1,7 @@
+target/
+node_modules/
+contracts/*/src/packages
+contracts/*/target
+artifacts/
+contracts/*/artifacts
+.DS_Store

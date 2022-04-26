@@ -1,0 +1,43 @@
+{
+    "_global": {
+      "_base": {
+        "store": {
+          "fee": {
+            "gasLimit": 2000000,
+            "amount": {
+              "uluna": 200000
+            }
+          }
+        },
+        "instantiation": {
+          "fee": {
+            "gasLimit": 2000000,
+            "amount": {
+              "uluna": 200000
+            }
+          },
+          "instantiateMsg": {
+            "price": 46
+        }
+        }
+      }
+    },
+    "mainnet": {
+      "_connection": {
+        "chainID": "columbus-5",
+        "URL": "https://lcd.terra.dev"
+      }
+    },
+    "testnet": {
+      "_connection": {
+        "chainID": "bombay-12",
+        "URL": "https://bombay-lcd.terra.dev"
+      }
+    },
+    "localterra": {
+      "_connection": {
+        "chainID": "localterra",
+        "URL": "http://localhost:3060"
+      }
+    }
+  }
