@@ -3,6 +3,13 @@
 This repo contains the homework instructions as well as skeleton code that you
 can fill in to complete the homework.
 
+## Getting help
+
+If something is not clear or you get stuck, ask for help in the #homework-help
+channel on the event's Discord server.
+
+## Organization
+
 The repo is organized as follows:
 
 * `HOMEWORK.md`: The instructions/spec for the homework. Read this README first,
@@ -188,4 +195,4 @@ fiddling with flags, but you can do whatever you want.
 
 ## Homework
 
-Now that you are done with this README, continue by reading `HOMEWORK.md`!
+Now that you are done with this README, continue by reading [`HOMEWORK.md`](https://github.com/am-work/terra-homework/blob/master/HOMEWORK.md)!
