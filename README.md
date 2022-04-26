@@ -77,11 +77,10 @@ npm install scripts/
     it to stdout.
 * Once you have created a wallet (and saved a copy of its private key), send
   yourself some Luna using https://faucet.terra.money/.
-* Add your new private key to `keys.terrain.js`. Just add a new entry called
+* Copy the file `keys.terrain.js.sample` to `keys.terrain.js`. Then add your new private key to `keys.terrain.js`. Just add a new entry called
   "myKey" (or whatever name you want, really) similar to the keys that are
   already there. You'll need to remember the name "myKey" for later commands.
-  **NOTE:** If you are pushing your code to a public repo, make sure to add
-  `keys.terrain.js` to `.gitignore` to avoid leaking your new private key! You
+  `keys.terrain.js` should NEVER be pushed to public repo (that is why it is in `.gitignore`) to avoid leaking your new private key! You
   should treat your private key just like a password since anyone that has it
   will be able to take your balance from the blockchain. NEVER publish your
   private keys, even if they are only used on testnet!
