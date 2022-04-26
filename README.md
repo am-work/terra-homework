@@ -136,7 +136,8 @@ contract and is explained later).
    you understand what this data means! If you don't understand it, ask around.
    Do not blindly deploy the contract without changing the `InstantiateMsg`
    section; otherwise you'll run into trouble later.
-2) Run these commands to deploy it to Testnet:
+2) Make sure your wallet has some UST (it's needed to pay for the deployment). You can get some UST by using https://faucet.terra.money/ to send yourself some Luna, then use the Terra Station Chrome extension to convert that Luna to UST (or use `scripts/native/convert-luna-to-ust.js`; see instructions on how to run the scripts in `scripts/` later).
+3) Run these commands to deploy it to Testnet:
 
 ```bash
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
@@ -186,7 +187,9 @@ whatever data is stored in the contract to be compatible with the new code.
 ### Running scripts inside `scripts/`
 
 These are handy scripts that will let you test your contracts, build automation,
-etc. To run them, just do something like this:
+etc. First, copy your private key to `scripts/library.js` (these wallets will be available from the scripts and will make your life easier).
+
+Then run any script you want with this:
 
 ```
 cd scripts/
@@ -195,12 +198,13 @@ node scripts/native/generate-new-wallet.js
 ```
 
 All the scripts are extremely simple and take no flags. Just open them and
-change whatever you need (e.g. use a different amount or a different address).
+change whatever you need (e.g. use a different amount, a different wallet, a different contract address, etc).
 
-This is really more of a playground. You can modify them, copy them, extend
-them, add flags, or whatever makes sense to you. In my case, I just open them,
-change the amount/contract address and run them again. I find that simpler than
-fiddling with flags, but you can do whatever you want.
+This is really more of a playground. You can modify these scripts, copy them,
+extend them, chain them, add flags, or whatever makes sense to you. In my case,
+I just open them, change the amount/contract address and run them again. I find
+that simpler than fiddling with flags, but you can do whatever makes your life
+easier.
 
 ## Homework
 
