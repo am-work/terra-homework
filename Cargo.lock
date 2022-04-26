@@ -276,23 +276,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "cw20_token"
-version = "0.0.0"
-dependencies = [
- "cosmwasm-schema",
- "cosmwasm-std",
- "cosmwasm-storage",
- "cw-storage-plus",
- "cw0 0.8.1",
- "cw2",
- "cw20 0.8.1",
- "cw20-legacy",
- "schemars",
- "serde",
- "thiserror",
-]
-
-[[package]]
 name = "der"
 version = "0.4.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -308,6 +291,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
 dependencies = [
  "generic-array",
+]
+
+[[package]]
+name = "driedmango_token"
+version = "0.0.0"
+dependencies = [
+ "cosmwasm-schema",
+ "cosmwasm-std",
+ "cosmwasm-storage",
+ "cw-storage-plus",
+ "cw0 0.8.1",
+ "cw2",
+ "cw20 0.8.1",
+ "cw20-legacy",
+ "schemars",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]

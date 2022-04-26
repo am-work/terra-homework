@@ -1,9 +1,9 @@
 [package]
-name = "cw20_token"
+name = "driedmango_token"
 version = "0.0.0"
-authors = ["Terraform Labs, PTE."]
+authors = ["Moats DAO"]
 edition = "2018"
-description = "Backward compatible implementation of a CosmWasm-20 compliant token"
+description = "MANGO: Backward compatible implementation of a CosmWasm-20 compliant token"
 license = "MIT"
 repository = "https://github.com/terraswap/terraswap"
 homepage = "https://cosmwasm.com"

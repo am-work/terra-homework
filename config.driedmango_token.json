@@ -18,11 +18,11 @@
         },
         "instantiateMsg":{ 
           "decimals": 6,
-          "initial_balances": [{ "address": "terra18yfx9skmexwxvpxal6wtc5unjvcc68xtgl0l56", "amount":"1000000000000" }],
-          "name": "Lemon Token", 
-          "symbol": "LMON",
-          "mint": { "minter": "terra18yfx9skmexwxvpxal6wtc5unjvcc68xtgl0l56", "cap":"1000000000000000" }
-      }
+          "initial_balances": [{ "address": "terra1ghuwkhhjck7kp44rw8rtfuhf3nzk8eff5xmmyt", "amount":"1000000000000" }],
+          "name": "Dried Mango Token", 
+          "symbol": "DMNGO",
+          "mint": { "minter": "terra1ghuwkhhjck7kp44rw8rtfuhf3nzk8eff5xmmyt", "cap":"1000000000000000" }
+        }
       }
     }
   },
