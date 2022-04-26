@@ -64,7 +64,7 @@ enum ExecuteMsg {
 enum QueryMsg {
   // Returns the most recently stored price.
   // Public endpoint (like all query methods).
-  GetPrice(amount) 
+  GetPrice{} 
 }
 ```
 
