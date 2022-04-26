@@ -50,6 +50,11 @@ unless explicitly noted otherwise.
   https://rustup.rs/, https://nodejs.org/en/download/package-manager/,
   https://docs.docker.com/get-docker/). You may already have some of these
   installed; that's OK, but make sure you have a recent version.
+* Make sure that you have Rust >= 1.60. You can check your Rust version by running this:
+```
+$ rustc --version
+rustc 1.60.0 (7737e0b5c 2022-04-04)
+```
 * Install Terra-specific tools. We are going to use Testnet (a.k.a. as
   `bombay-12`), so you don't need to worry about LocalTerra if you see it
   mentioned online. Something like this should install everything you need:
@@ -80,7 +85,7 @@ npm install scripts/
 * Copy the file `keys.terrain.js.sample` to `keys.terrain.js`. Then add your new private key to `keys.terrain.js`. Just add a new entry called
   "myKey" (or whatever name you want, really) similar to the keys that are
   already there. You'll need to remember the name "myKey" for later commands.
-  `keys.terrain.js` should NEVER be pushed to public repo (that is why it is in `.gitignore`) to avoid leaking your new private key! You
+  `keys.terrain.js` should NEVER be pushed to a public repo (that is why it is in `.gitignore`) to avoid leaking your new private key! You
   should treat your private key just like a password since anyone that has it
   will be able to take your balance from the blockchain. NEVER publish your
   private keys, even if they are only used on testnet!
@@ -131,7 +136,8 @@ contract and is explained later).
    you understand what this data means! If you don't understand it, ask around.
    Do not blindly deploy the contract without changing the `InstantiateMsg`
    section; otherwise you'll run into trouble later.
-2) Run these commands to deploy it to Testnet:
+2) Make sure your wallet has some UST (it's needed to pay for the deployment). You can get some UST by using https://faucet.terra.money/ to send yourself some Luna, then use the Terra Station Chrome extension to convert that Luna to UST (or use `scripts/native/convert-luna-to-ust.js`; see instructions on how to run the scripts in `scripts/` later).
+3) Run these commands to deploy it to Testnet:
 
 ```bash
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
@@ -181,7 +187,9 @@ whatever data is stored in the contract to be compatible with the new code.
 ### Running scripts inside `scripts/`
 
 These are handy scripts that will let you test your contracts, build automation,
-etc. To run them, just do something like this:
+etc. First, copy your private key to `scripts/library.js` (these wallets will be available from the scripts and will make your life easier).
+
+Then run any script you want with this:
 
 ```
 cd scripts/
@@ -190,12 +198,13 @@ node scripts/native/generate-new-wallet.js
 ```
 
 All the scripts are extremely simple and take no flags. Just open them and
-change whatever you need (e.g. use a different amount or a different address).
+change whatever you need (e.g. use a different amount, a different wallet, a different contract address, etc).
 
-This is really more of a playground. You can modify them, copy them, extend
-them, add flags, or whatever makes sense to you. In my case, I just open them,
-change the amount/contract address and run them again. I find that simpler than
-fiddling with flags, but you can do whatever you want.
+This is really more of a playground. You can modify these scripts, copy them,
+extend them, chain them, add flags, or whatever makes sense to you. In my case,
+I just open them, change the amount/contract address and run them again. I find
+that simpler than fiddling with flags, but you can do whatever makes your life
+easier.
 
 ## Homework
 
