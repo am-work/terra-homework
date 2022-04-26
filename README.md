@@ -50,7 +50,7 @@ unless explicitly noted otherwise.
   https://rustup.rs/, https://nodejs.org/en/download/package-manager/,
   https://docs.docker.com/get-docker/). You may already have some of these
   installed; that's OK, but make sure you have a recent version.
-* Make sure that you have Rust >= 1.60. You can run your Rust version by running this:
+* Make sure that you have Rust >= 1.60. You can check your Rust version by running this:
 ```
 $ rustc --version
 rustc 1.60.0 (7737e0b5c 2022-04-04)
