@@ -8,10 +8,16 @@
 # compiled smart contract can be, and by default Rust will produce large WASM
 # files). The final output consists of one optimized *.wasm file per contract.
 # These are left in the artifacts/ subdirectory.
+
+version_str=":0.12.6"
+if [[ $(arch) == 'arm64' ]]; then
+  version_str="-arm64:0.12.5"
+fi
+
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/workspace-optimizer:0.12.6
+  cosmwasm/workspace-optimizer"$version_str"
 #  ^ Output is left at artifacts/*.wasm
 
 # Copy artifacts to where `terrain deploy` expects them. This is a bit hacky,
