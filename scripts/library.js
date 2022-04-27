@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+  import fetch from 'isomorphic-fetch';
 import { Coins, LCDClient } from '@terra-money/terra.js';
 const gasPrices =  await fetch('https://bombay-fcd.terra.dev/v1/txs/gas_prices');
 const gasPricesJson = await gasPrices.json();
