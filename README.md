@@ -127,7 +127,7 @@ contract is created on the blockchain, and usually you only want one copy. (You
 can update an existing copy if you modify your code. This is called migrating a
 contract and is explained later).
 
- There are two things you need to do:
+ There are three things you need to do:
 
 1) First, update the file called `config.<contract name>.json`. For example, if
    you want to deploy the `cw20_token`, update `config.cw20_token.json`. You
@@ -177,7 +177,7 @@ commands instead:
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
 SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm.sh
-npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SGNER --network testnet --config-path config.$CONTRACT_NAME.json
+npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json
 ```
 
 When you migrate a contract like this, the `migrate` Rust method of your
@@ -186,25 +186,31 @@ whatever data is stored in the contract to be compatible with the new code.
 
 ### Running scripts inside `scripts/`
 
-These are handy scripts that will let you test your contracts, build automation,
-etc. First, copy your private key to `scripts/library.js` (these wallets will be available from the scripts and will make your life easier).
+The `scripts/` directory contains handy scripts that will let you test your contracts, build automation, run one-time operations, etc.
+
+First, copy your private key to `scripts/library.js` (private keys in this file can be imported from other files in the `scripts/` directory, so having your private key in this file will make your life easier since you don't need to copy it to all scripts. Keep in mind that not all scripts need a private key -- public operations like querying a smart contract don't require a private key).
 
 Then run any script you want with this:
 
-```
+```bash
 cd scripts/
+# You only need to run npm install the first time, to make sure you have all JS dependencies installed.
 npm install
+
+# This is the important line that actually executes the script.
 node scripts/native/generate-new-wallet.js
 ```
 
-All the scripts are extremely simple and take no flags. Just open them and
+All the scripts are very simple and take no flags. Just open them and
 change whatever you need (e.g. use a different amount, a different wallet, a different contract address, etc).
 
-This is really more of a playground. You can modify these scripts, copy them,
+These scripts are meant to be a playground. You can modify them, copy them,
 extend them, chain them, add flags, or whatever makes sense to you. In my case,
-I just open them, change the amount/contract address and run them again. I find
-that simpler than fiddling with flags, but you can do whatever makes your life
-easier.
+I just open them, change the amount/contract address and run them. I find that
+simpler than fiddling with flags, but you can change them to do whatever makes
+your life easier.
+
+You can also use these scripts as inspiration to build more sophisticated automation, like an off-chain oracle for example. If you want to do that, the most important file to read is `scripts/library.js`; this is were we initialize the `LCDClient` object (the actual JavaScript object that we use to hit the Terra HTTP API).
 
 ## Homework
 

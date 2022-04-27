@@ -1,0 +1,10 @@
+# In this homework we aren't actually building a frontend, so we
+# don't care about this file. Unfortunately terrain WANTS us to have
+# this file, or else it will fail with errors like this when deploying:
+#
+#    Error: ENOENT: no such file or directory, copyfile './refs.terrain.json' -> './frontend/src/refs.terrain.json'
+#
+# So we just have this frontend/src directory to keep Terrain happy and
+# add refs.terrain.json to .gitignore to avoid confusion (we don't want
+# beginners to run "git status" and wonder what this weird frontend file is).
+refs.terrain.json

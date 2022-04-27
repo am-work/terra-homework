@@ -64,7 +64,7 @@ enum ExecuteMsg {
 enum QueryMsg {
   // Returns the most recently stored price.
   // Public endpoint (like all query methods).
-  GetPrice(amount) 
+  GetPrice()
 }
 ```
 
@@ -117,7 +117,7 @@ enum ExecuteMsg {
   // Withdraws Luna that has been accumulated over time from selling Lemons.
   // Sends that Luna to the caller.
   // Private endpoint (only owner can call).
-  WithdrawLuna(amount) 
+  WithdrawLuna(amount)
 }
 ```
 
@@ -143,7 +143,7 @@ At this point, you should have 3 contracts deployed:
     - Undelegating Luna from a smart contract
     - Claiming rewards from delegated Luna
     - Converting native stablecoins to Luna
-    
+
 
 So far, your Lemon Swap contract is able to automatically sell Lemons in exchange for Luna. Over time, it will accumulate a balance in Luna (especially if you are not calling `WithdrawLuna` frequently). This Luna is safe and yours to keep, but it is just sitting idle inside your contract which is not very productive.
 
@@ -166,7 +166,7 @@ enum ExecuteMsg {
   // - Sends `amount` Luna to caller. Any remaining Luna balance is kept inside
   //   the contract.
   // Private endpoint (only owner can call).
-  WithdrawLuna2(amount) 
+  WithdrawLuna2(amount)
 
   // Starts the undelegation process of `amount` Luna that was previously
   // delegated in BuyLemons2. This process will take 21 days (i.e.
@@ -177,12 +177,12 @@ enum ExecuteMsg {
 }
 ```
 
-- You can choose a validator from [https://bombay.stake.id/](https://bombay.stake.id/#/). e.g. [https://finder.terra.money/testnet/validator/terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw](https://finder.terra.money/testnet/validator/terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw). 
+- You can choose a validator from [https://bombay.stake.id/](https://bombay.stake.id/#/). e.g. [https://finder.terra.money/testnet/validator/terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw](https://finder.terra.money/testnet/validator/terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw).
 - Just make sure to choose a validator that **doesn't have a 100% comission**, otherwise you won't accrue any rewards!
 - Here are some code pointers of how to do all the operations needed. Look for these keywords on open-source projects like [Prism](https://github.com/prism-finance/prism-contracts), TerraSwap, Anchor, etc if you need examples on how to do things and mimic what they are doing. Finding examples is probably the hardest part of Terra development! If you get stuck, ask for help.
 
     - Converting any native stable coin to Luna:
-        - [terra_cosmwasm::create_swap_msg](https://github.com/prism-finance/prism-contracts/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-yasset-staking/src/swaps.rs#L44)      
+        - [`terra_cosmwasm::create_swap_msg`](https://github.com/prism-finance/prism-contracts/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-yasset-staking/src/swaps.rs#L44)
     - Delegate:
         - [`CosmosMsg::Staking(StakingMsg::Delegate`](https://github.com/prism-finance/prism-contracts/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-vault/src/bond.rs#L131)
     - Undelegate:
@@ -190,7 +190,7 @@ enum ExecuteMsg {
     - Rewards:
         - [`SetWithdrawAddress`](https://github.com/prism-finance/prism-contracts/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-vault/src/config.rs#L144)
         - [`WithdrawDelegatorReward`](https://github.com/prism-finance/prism-contracts-private/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-vault/src/contract.rs#L306)
-    
+
 
 ### **HOMEWORK TECHNICALLY ENDS HERE**. Everything below is optional. These optional parts are more open-ended and you are mostly on your own. Make sure you have mastered everything above before trying these.
 

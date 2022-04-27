@@ -8,7 +8,7 @@ const gasPricesJson = await gasPrices.json();
 const client = new LCDClient({
   URL: "https://bombay-lcd.terra.dev/", // Use "https://lcd.terra.dev" for prod "http://localhost:1317" for localterra.
   chainID: "bombay-12", // Use "columbus-5" for production or "localterra".
-  gasPrices: { uluna: gasPricesJson['uluna'] },
+  gasPrices: { uluna: gasPricesJson['uluna'] }, // Always pay fees in Luna. You can change this to pay fees in other currencies like UST, if you prefer.
   gasAdjustment: "1.5", // Increase gas price slightly so transactions go through smoothly.
   gas: 10000000,
 });
