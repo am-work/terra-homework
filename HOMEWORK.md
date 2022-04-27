@@ -182,7 +182,7 @@ enum ExecuteMsg {
 - Here are some code pointers of how to do all the operations needed. Look for these keywords on open-source projects like [Prism](https://github.com/prism-finance/prism-contracts), TerraSwap, Anchor, etc if you need examples on how to do things and mimic what they are doing. Finding examples is probably the hardest part of Terra development! If you get stuck, ask for help.
 
     - Converting any native stable coin to Luna:
-        - [terra_cosmwasm::create_swap_msg](https://github.com/prism-finance/prism-contracts/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-yasset-staking/src/swaps.rs#L44)
+        - [`terra_cosmwasm::create_swap_msg`](https://github.com/prism-finance/prism-contracts/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-yasset-staking/src/swaps.rs#L44)
     - Delegate:
         - [`CosmosMsg::Staking(StakingMsg::Delegate`](https://github.com/prism-finance/prism-contracts/blob/cff1a14cf7d136de19c43a4b01c05a89ec94c409/contracts/prism-vault/src/bond.rs#L131)
     - Undelegate:
