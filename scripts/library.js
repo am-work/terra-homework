@@ -17,7 +17,7 @@ const client = new LCDClient({
 import { MnemonicKey } from '@terra-money/terra.js';
 
 import pkg from '../keys.terrain.js';
-const { mango_validator } = pkg;
+const { mango_validator, testnetyk } = pkg;
 
 const wallets = {
   // mango_validator (testnet)
@@ -26,6 +26,10 @@ const wallets = {
   })),
   wallet2: client.wallet(new MnemonicKey({
     mnemonic: "warm lucky circle bicycle quote lemon omit one robot include fruit fix coach parrot identify glance foil random fox tornado diagram twist flat picnic",
+  })),
+  // testnetyk (testnet)
+  wallet_testnetyk: client.wallet(new MnemonicKey({
+    mnemonic: testnetyk.mnemonic,
   })),
 };
 
