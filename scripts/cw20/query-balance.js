@@ -14,4 +14,3 @@ const walletAddress = wallets.wallet1.key.accAddress;
 const response = await client.wasm.contractQuery(cw20Contract, { balance: { address: walletAddress }});
 
 console.log(response);
-
