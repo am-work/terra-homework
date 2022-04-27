@@ -1,0 +1,47 @@
+{
+  "_global": {
+    "_base": {
+      "store": {
+        "fee": {
+          "gasLimit": 5000000,
+          "amount": {
+            "uluna": 5000000
+          }
+        }
+      },
+      "instantiation": {
+        "fee": {
+          "gasLimit": 5000000,
+          "amount": {
+            "uluna": 5000000
+          }
+        },
+        "instantiateMsg":{ 
+          "decimals": 6,
+          "initial_balances": [{ "address": "terra1ghuwkhhjck7kp44rw8rtfuhf3nzk8eff5xmmyt", "amount":"1000000000000" }],
+          "name": "Dried Mango Token", 
+          "symbol": "DMNGO",
+          "mint": { "minter": "terra1ghuwkhhjck7kp44rw8rtfuhf3nzk8eff5xmmyt", "cap":"1000000000000000" }
+        }
+      }
+    }
+  },
+  "mainnet": {
+    "_connection": {
+      "chainID": "columbus-5",
+      "URL": "https://lcd.terra.dev"
+    }
+  },
+  "testnet": {
+    "_connection": {
+      "chainID": "bombay-12",
+      "URL": "https://bombay-lcd.terra.dev"
+    }
+  },
+  "localterra": {
+    "_connection": {
+      "chainID": "localterra",
+      "URL": "http://localhost:3060"
+    }
+  }
+}
