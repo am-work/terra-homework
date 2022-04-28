@@ -146,6 +146,15 @@ SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
 npx @terra-money/terrain deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild
 ```
 
+* For M1 you can use arm64 flag for local and testnet, just keep in mind this is not recommended for production because the wasm file could be different than intel base optimization.
+
+```bash
+CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
+SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
+./build_optimized_wasm.sh
+npx @terra-money/terrain deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild --arm64
+```
+
 
 The `./build_optimized_wasm.sh` part just compiles all of your Rust contracts
 into optimized WASM files that are small enough to be pushed to Terra (Terra has
@@ -178,6 +187,15 @@ CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deplo
 SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm.sh
 npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json
+```
+
+* For M1 you can use arm64 flag for local and testnet, just keep in mind this is not recommended for production because the wasm file could be different than intel base optimization.
+
+```bash
+CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
+SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
+./build_optimized_wasm.sh
+npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --arm64 --config-path config.$CONTRACT_NAME.json
 ```
 
 When you migrate a contract like this, the `migrate` Rust method of your
