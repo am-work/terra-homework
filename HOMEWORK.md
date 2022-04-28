@@ -196,7 +196,7 @@ enum ExecuteMsg {
 
 ### (Optional) Stretch: Part 5: Constant Product Automated Market Maker
 
-Implement a constant-product AMM using [https://www.notion.so/Automated-Market-Maker-Tutorial-b439ae63e7ee448e9e27ca9ec530ebe5](https://www.notion.so/Automated-Market-Maker-Tutorial-b439ae63e7ee448e9e27ca9ec530ebe5) as guideline.
+Implement a constant-product AMM using the ideas in [optional/AMM.md](https://github.com/am-work/terra-homework/blob/master/optional/AMM.md).
 
 ### (Optional) Stretch: Part 6: AMM with oracle-based safety checks
 
