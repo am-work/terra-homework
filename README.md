@@ -77,7 +77,7 @@ npm install scripts/
     The Terra Station extension is a UI tool that lets you create a wallet, see
     its balance, convert Luna to UST, etc. It is recommended to get familiar
     with it, but it's not strictly necessary for this homework.
-  * Run the `scripts/native/generate-new-wallet.js` script (more details on how
+  * Run the `npm run generate-new-wallet --prefix=scripts` script (more details on how
     to run scripts below). This generates a new key programatically and prints
     it to stdout.
 * Once you have created a wallet (and saved a copy of its private key), send
@@ -136,12 +136,12 @@ contract and is explained later).
    you understand what this data means! If you don't understand it, ask around.
    Do not blindly deploy the contract without changing the `InstantiateMsg`
    section; otherwise you'll run into trouble later.
-2) Make sure your wallet has some UST (it's needed to pay for the deployment). You can get some UST by using https://faucet.terra.money/ to send yourself some Luna, then use the Terra Station Chrome extension to convert that Luna to UST (or use `scripts/native/convert-luna-to-ust.js`; see instructions on how to run the scripts in `scripts/` later).
+2) Make sure your wallet has some UST (it's needed to pay for the deployment). You can get some UST by using https://faucet.terra.money/ to send yourself some Luna, then use the Terra Station Chrome extension to convert that Luna to UST (or use `npm run generate-new-wallet --prefix=scripts`; see instructions on how to run the scripts in `scripts/` later).
 3) Run these commands to deploy it to Testnet:
 
 ```bash
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
-SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
+SIGNER=wallet1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm.sh
 npx @terra-money/terrain deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild
 ```
@@ -188,17 +188,19 @@ whatever data is stored in the contract to be compatible with the new code.
 
 The `scripts/` directory contains handy scripts that will let you test your contracts, build automation, run one-time operations, etc.
 
-First, copy your private key to `scripts/library.js` (private keys in this file can be imported from other files in the `scripts/` directory, so having your private key in this file will make your life easier since you don't need to copy it to all scripts. Keep in mind that not all scripts need a private key -- public operations like querying a smart contract don't require a private key).
+Copy your contract address(es) from `refs.terrain.json` and add them to `network.ts`. Contract addresses are passed to scripts through the `scripts/library.ts` function.
 
-Then run any script you want with this:
+Your private keys in `keys.terrain.js` will be read by `scripts/library.ts` and made available to scripts.
+
+Run scripts with `npm run <filename>`. See `scripts/package.json` for options.
 
 ```bash
 cd scripts/
 # You only need to run npm install the first time, to make sure you have all JS dependencies installed.
 npm install
 
-# This is the important line that actually executes the script.
-node scripts/native/generate-new-wallet.js
+# This npm script will execute ./native/generate-new-wallet.ts
+npm run generate-new-wallet
 ```
 
 All the scripts are very simple and take no flags. Just open them and
@@ -210,7 +212,9 @@ I just open them, change the amount/contract address and run them. I find that
 simpler than fiddling with flags, but you can change them to do whatever makes
 your life easier.
 
-You can also use these scripts as inspiration to build more sophisticated automation, like an off-chain oracle for example. If you want to do that, the most important file to read is `scripts/library.js`; this is were we initialize the `LCDClient` object (the actual JavaScript object that we use to hit the Terra HTTP API).
+You can also use these scripts as inspiration to build more sophisticated automation, like an off-chain oracle for example. If you want to do that, the most important file to read is `scripts/library.ts`; this is were we initialize the `LCDClient` object (the actual JavaScript object that we use to hit the Terra HTTP API).
+
+The scripts can also be run with VSCode's NodeJS debugger, so you can set brekpoints and debug as you develop. Press `F5` to launch the debugger, then pick the script you want to run. See `.vscode/launch.json` for more.
 
 ## Homework
 
