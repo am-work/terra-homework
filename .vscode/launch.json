@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "run script",
+            "type": "node",
+            "request": "launch",
+            "args": [
+                "${workspaceFolder}/scripts/${input:scriptPath}",
+                // "${input:firstArg}"
+            ],
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "${workspaceRoot}/scripts/node_modules/ts-node/register"
+            ],
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}",
+            "protocol": "inspector",
+        },
+    ],
+    "inputs": [
+        {
+            "type": "pickString",
+            "id": "scriptPath",
+            "description": "Which script do you want to run?",
+            "options": [
+                "cw20/query-balance.ts",
+                "cw20/transfer.ts",
+                "native/convert-luna-to-ust.ts",
+                "native/generate-new-wallet.ts",
+                "native/get-balance.ts",
+                "native/send-luna-natively.ts",
+                "swap2/execute-buy.ts",
+                "swap2/execute-start-undelegation.ts",
+                "swap2/execute-withdraw.ts",
+                "swap2/query-token-address.ts",
+            ],
+            "default": "query-balance"
+        },
+        {
+            "type": "promptString",
+            "id": "firstArg",
+            "description": "first arg for the script",
+            "default": ""
+        }
+    ]
+}

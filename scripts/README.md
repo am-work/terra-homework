@@ -10,7 +10,13 @@ The examples at https://docs.terra.money/docs/develop/sdks/terra-js/common-examp
 
 ## Private keys
 
-Configure your private keys in `library.js`.
+Configure your private keys in [/keys.terrain.js](/keys.terrain.js).
+
+## Network config
+
+Configure your network details in [/networks.ts](/networks.ts).
+
+Choose which network is passed to the LCD client in [./library.ts](./library.ts)
 
 ## How to run
 
@@ -18,5 +24,8 @@ Configure your private keys in `library.js`.
 # From git repo root
 cd scripts
 npm install
-node get-balance.js
+npn run get-balance
 ```
+
+
+You may also run these scripts with the VSCode NodeJS debugger. Press `F5`, or start the debugger from the debug pane, then choose the script to run. You can set breakpoints in scripts, and use all the VSCode debugger features. See `.vscode/launch.json` for the debugger configuration, or to register new scripts.

@@ -4,7 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "query-balance": "ts-node ./cw20/query-balance.ts",
+    "transfer": "ts-node ./cw20/transfer.ts",
+    "convert-luna-to-ust": "ts-node ./native/convert-luna-to-ust.ts",
+    "generate-new-wallet": "ts-node ./native/generate-new-wallet.ts",
+    "get-balance": "ts-node ./native/get-balance.ts",
+    "send-luna-natively": "ts-node ./native/send-luna-natively.ts",
+    "execute-buy": "ts-node ./swap2/execute-buy.ts",
+    "execute-start-undelegation": "ts-node ./swap2/execute-start-undelegation.ts",
+    "execute-withdraw": "ts-node ./swap2/execute-withdraw.ts",
+    "query-token-address": "ts-node ./swap2/query-token-address.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +23,9 @@
     "@terra-money/terra.js": "^3.0.11",
     "isomorphic-fetch": "^3.0.0"
   },
-  "type": "module"
+  "devDependencies": {
+    "@types/isomorphic-fetch": "^0.0.36",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
 }
