@@ -217,7 +217,8 @@ You can also use these scripts as inspiration to build more sophisticated automa
 Now that you are done with this README, continue by reading [`HOMEWORK.md`](https://github.com/am-work/terra-homework/blob/master/HOMEWORK.md)!
 
 
-## Troubleshooting / Hints
+## Troubleshooting
+
 - You'll notice that `scripts/library.js` has several wallet addresses that aren't synced up with `keys.terrain.js`. Make sure that you go into `scripts/library.js` and copy anything you added to `keys.terrain.js` until this process is automated
 - If you try updating your contract's `instantiateMsg` like total supply and initial balances but don't see them updated, this is by design. If you want to change the minter, total supply, etc. you'll have to publish a new contract with the same info
-- If you're getting `Error: the lock file /code/Cargo.lock needs to be updated but --locked was passed to prevent this`, run `mv Cargo.toml Cargo.toml.bak` and that error should go away
+- If you're getting `Error: the lock file /code/Cargo.lock needs to be updated but --locked was passed to prevent this`, make sure you are following instructions in the [Deploying a smart contract](https://github.com/am-work/terra-homework#deploying-a-smart-contract) section to the letter.
