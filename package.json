@@ -8,6 +8,13 @@
   "workspaces": [
     "frontend"
   ],
+  "scripts": {
+    "terrain": "terrain",
+    "deploy": "terrain deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild",
+    "migrate": "terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json",
+    "cw20-deploy": "CONTRACT_NAME=cw20_token && SIGNER=wallet1 && npm run deploy",
+    "cw20-migrate": "CONTRACT_NAME=cw20_token && SIGNER=wallet1 && npm run migrate"
+  },
   "author": "",
   "license": "ISC"
 }

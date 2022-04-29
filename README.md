@@ -63,8 +63,7 @@ rustup default stable
 rustup target add wasm32-unknown-unknown
 cargo install cargo-generate --features vendored-openssl
 cargo install cargo-run-script
-npm install @terra-money/terrain
-npm install scripts/
+npm install && npm install --prefix=scripts
 ```
 
   If you get stuck, read
@@ -143,7 +142,7 @@ contract and is explained later).
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
 SIGNER=wallet1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm.sh
-npx @terra-money/terrain deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild
+npm run terrain -- deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild
 ```
 
 * If you are on a M1 Mac, you can replace the last 2 steps with this to make it run a lot faster (but only use this for localterra and testnet; use the normal commands above if deploying to mainnet):
@@ -159,7 +158,8 @@ into optimized WASM files that are small enough to be pushed to Terra (Terra has
 limits on how large the compiled WASM bytecode can be). Feel free to look at
 this script if you are curious to see how it's done (hint: it's not pretty).
 
-The `npx @terra-money/terrain deploy` part takes the existing optimized WASM
+The `npm run terrain` command aliases `@terra-money/terrain` from `node_modules/`.
+The `terrain deploy` part takes the existing optimized WASM
 file from the previous step as input (the `--no-rebuild` flag is important!) and
 deploys it to Testnet. Here are some important things to know:
   * The `--signer` flag refers to one of the keys in `keys.terrain.js`.
@@ -182,9 +182,9 @@ commands instead:
 
 ```bash
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
-SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
+SIGNER=wallet1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm.sh
-npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json
+npm run terrain -- contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json
 ```
 
 * * If you are on a M1 Mac, you can replace the last 2 steps with this to make it run a lot faster (but only use this for localterra and testnet; use the normal commands above if migrating in mainnet)
