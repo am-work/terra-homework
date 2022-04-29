@@ -149,7 +149,7 @@ npm run terrain -- deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin 
 
 ```bash
 ./build_optimized_wasm_arm64.sh # Notice _arm64.sh added at the end.
-npx @terra-money/terrain deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild --arm64 # Notice --arm64 flag
+npm run terrain -- deploy $CONTRACT_NAME --signer $SIGNER --set-signer-as-admin --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild --arm64 # Notice --arm64 flag
 ```
 
 
@@ -193,7 +193,7 @@ npm run terrain -- contract:migrate $CONTRACT_NAME --signer $SIGNER --network te
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
 SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm_arm64.sh
-npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --arm64 --config-path config.$CONTRACT_NAME.json
+npm run terrain -- contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --arm64 --config-path config.$CONTRACT_NAME.json
 ```
 
 When you migrate a contract like this, the `migrate` Rust method of your
