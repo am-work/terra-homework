@@ -1,6 +1,8 @@
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
-use cosmwasm_std::{to_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
+use cosmwasm_std::{
+    to_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult, Uint128,
+};
 use cw2::set_contract_version;
 
 use crate::error::ContractError;
@@ -32,13 +34,14 @@ pub fn instantiate(
 
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn execute(
-    _deps: DepsMut,
+    deps: DepsMut,
     _env: Env,
-    _info: MessageInfo,
-    _msg: ExecuteMsg,
+    info: MessageInfo,
+    msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
-    //TODO: execute try_update_price
-    Ok(Response::new())
+    match msg {
+        ExecuteMsg::UpdatePrice { price } => update_price(deps, info, price),
+    }
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
@@ -51,18 +54,36 @@ pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     }
 }
 
+/// update_prices validates that the caller is authorized and then saves the new
+/// price in storage.
+fn update_price(
+    deps: DepsMut,
+    info: MessageInfo,
+    new_price: Uint128,
+) -> Result<Response, ContractError> {
+    let mut state = STATE.load(deps.storage)?;
+    // Only owner is allowed to call this contract.
+    if info.sender != state.owner {
+        return Err(ContractError::Unauthorized {});
+    }
+    state.price = new_price;
+    STATE.save(deps.storage, &state)?;
+    Ok(Response::new()
+        .add_attribute("action", "update_price")
+        .add_attribute("new_price", new_price.to_string()))
+}
+
 #[cfg(test)]
 mod tests {
     use crate::msg::QueryPriceResponse;
 
     use super::*;
     use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
-    use cosmwasm_std::{from_binary, Uint128};
+    use cosmwasm_std::{attr, from_binary, Uint128};
 
     #[test]
     fn test_instantiate() {
         let mut deps = mock_dependencies(&[]);
-
         let msg = InstantiateMsg {
             price: Uint128::from(17u32),
         };
@@ -82,5 +103,37 @@ mod tests {
     }
 
     #[test]
-    fn test_update_price() {}
+    fn test_update_price() {
+        let mut deps = mock_dependencies(&[]);
+        let msg = InstantiateMsg {
+            price: Uint128::from(17u32),
+        };
+        let info = mock_info("creator", &[]);
+        instantiate(deps.as_mut(), mock_env(), info.clone(), msg).unwrap();
+
+        // Random attacker cannot update price.
+        let attacker = mock_info("mallory", &[]);
+        let msg = ExecuteMsg::UpdatePrice {
+            price: Uint128::from(666u32),
+        };
+        let err = execute(deps.as_mut(), mock_env(), attacker, msg.clone()).unwrap_err();
+        assert_eq!(err, ContractError::Unauthorized {});
+
+        // Owner is allowed to update price.
+        let response = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+        assert_eq!(
+            response,
+            Response::new().add_attributes(vec![
+                attr("action", "update_price"),
+                attr("new_price", "666")
+            ])
+        );
+
+        // Querying price after a successful update should return the new price.
+        let response = from_binary::<QueryPriceResponse>(
+            &query(deps.as_ref(), mock_env(), QueryMsg::QueryPrice {}).unwrap(),
+        )
+        .unwrap();
+        assert_eq!(response, QueryPriceResponse{ price: Uint128::from(666u32)});
+    }
 }
