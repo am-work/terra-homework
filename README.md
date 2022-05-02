@@ -184,7 +184,7 @@ commands instead:
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
 SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm.sh
-npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json
+npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --config-path config.$CONTRACT_NAME.json --no-rebuild
 ```
 
 * * If you are on a M1 Mac, you can replace the last 2 steps with this to make it run a lot faster (but only use this for localterra and testnet; use the normal commands above if migrating in mainnet)
@@ -193,7 +193,7 @@ npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --netw
 CONTRACT_NAME=cw20_token # Replace this with whatever contract you want to deploy
 SIGNER=sampleKey1 # Replace with the name of your key from keys.terrain.js.
 ./build_optimized_wasm_arm64.sh
-npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --arm64 --config-path config.$CONTRACT_NAME.json
+npx @terra-money/terrain contract:migrate $CONTRACT_NAME --signer $SIGNER --network testnet --arm64 --config-path config.$CONTRACT_NAME.json --no-rebuild
 ```
 
 When you migrate a contract like this, the `migrate` Rust method of your
