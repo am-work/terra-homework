@@ -47,9 +47,9 @@ pub fn execute(
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
-        QueryMsg::QueryPrice {} => {
+        QueryMsg::GetPrice {} => {
             let state = STATE.load(deps.storage)?;
-            to_binary(&state.as_query_price_response())
+            to_binary(&state.as_get_price_response())
         }
     }
 }
@@ -75,7 +75,7 @@ fn update_price(
 
 #[cfg(test)]
 mod tests {
-    use crate::msg::QueryPriceResponse;
+    use crate::msg::GetPriceResponse;
 
     use super::*;
     use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
@@ -95,8 +95,8 @@ mod tests {
 
         // After instantiation, let's query the state and confirm it
         // returns what we passed to Instantiate.
-        let response = from_binary::<QueryPriceResponse>(
-            &query(deps.as_ref(), mock_env(), QueryMsg::QueryPrice {}).unwrap(),
+        let response = from_binary::<GetPriceResponse>(
+            &query(deps.as_ref(), mock_env(), QueryMsg::GetPrice {}).unwrap(),
         )
         .unwrap();
         assert_eq!(Uint128::from(17u32), response.price);
@@ -130,10 +130,10 @@ mod tests {
         );
 
         // Querying price after a successful update should return the new price.
-        let response = from_binary::<QueryPriceResponse>(
-            &query(deps.as_ref(), mock_env(), QueryMsg::QueryPrice {}).unwrap(),
+        let response = from_binary::<GetPriceResponse>(
+            &query(deps.as_ref(), mock_env(), QueryMsg::GetPrice {}).unwrap(),
         )
         .unwrap();
-        assert_eq!(response, QueryPriceResponse{ price: Uint128::from(666u32)});
+        assert_eq!(response, GetPriceResponse{ price: Uint128::from(666u32)});
     }
 }

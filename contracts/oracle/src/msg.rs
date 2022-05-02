@@ -16,12 +16,12 @@ pub enum ExecuteMsg {
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum QueryMsg {
-    // QueryPrice returns the price of a Lemon in Luna.
-    QueryPrice {},
+    // GetPrice returns the price of a Lemon in Luna.
+    GetPrice {},
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
-pub struct QueryPriceResponse {
+pub struct GetPriceResponse {
     pub price: Uint128,
 }

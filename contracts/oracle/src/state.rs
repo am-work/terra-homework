@@ -1,4 +1,4 @@
-use crate::msg::QueryPriceResponse;
+use crate::msg::GetPriceResponse;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -17,7 +17,7 @@ pub struct State {
 
 impl State {
     /// Convert State to QueryPriceResponse.
-    pub fn as_query_price_response(&self) -> QueryPriceResponse {
-        QueryPriceResponse { price: self.price }
+    pub fn as_get_price_response(&self) -> GetPriceResponse {
+        GetPriceResponse { price: self.price }
     }
 }
