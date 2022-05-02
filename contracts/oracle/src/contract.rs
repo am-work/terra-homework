@@ -1,13 +1,11 @@
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
-use cosmwasm_std::{
-    Binary, Deps, DepsMut, Env, MessageInfo, Response, StdError, StdResult,
-};
+use cosmwasm_std::{to_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
 use cw2::set_contract_version;
 
 use crate::error::ContractError;
 use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
-
+use crate::state::{State, STATE};
 
 // version info for migration info
 const CONTRACT_NAME: &str = "crates.io:oracle";
@@ -17,13 +15,19 @@ const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 pub fn instantiate(
     deps: DepsMut,
     _env: Env,
-    _info: MessageInfo,
-    _msg: InstantiateMsg,
+    info: MessageInfo,
+    msg: InstantiateMsg,
 ) -> Result<Response, ContractError> {
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
-
-    // TODO: instantiate contract
-    Ok(Response::new())
+    let state = &State {
+        owner: info.sender.clone(),
+        price: msg.price,
+    };
+    STATE.save(deps.storage, state)?;
+    Ok(Response::new()
+        .add_attribute("action", "instantiate")
+        .add_attribute("owner", info.sender.to_string())
+        .add_attribute("price", state.price))
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
@@ -38,34 +42,45 @@ pub fn execute(
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn query(_deps: Deps, _env: Env, _msg: QueryMsg) -> StdResult<Binary> {
-    // TODO
-    Err(StdError::generic_err("not implemented"))
+pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
+    match msg {
+        QueryMsg::QueryPrice {} => {
+            let state = STATE.load(deps.storage)?;
+            to_binary(&state.as_query_price_response())
+        }
+    }
 }
 
 #[cfg(test)]
 mod tests {
+    use crate::msg::QueryPriceResponse;
+
     use super::*;
     use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
-    use cosmwasm_std::{coins};
+    use cosmwasm_std::{from_binary, Uint128};
 
     #[test]
-    fn proper_initialization() {
+    fn test_instantiate() {
         let mut deps = mock_dependencies(&[]);
 
-        let msg = InstantiateMsg { price: 17 };
-        let info = mock_info("creator", &coins(1000, "earth"));
+        let msg = InstantiateMsg {
+            price: Uint128::from(17u32),
+        };
+        let info = mock_info("creator", &[]);
 
-        // we can just call .unwrap() to assert this was a success
+        // We can just call .unwrap() to assert this was a success
         let res = instantiate(deps.as_mut(), mock_env(), info, msg).unwrap();
         assert_eq!(0, res.messages.len());
 
-        // it worked, let's query the state
-        let res = query(deps.as_ref(), mock_env(), QueryMsg::QueryPrice {});
-        assert_eq!(res, Err(StdError::generic_err("not implemented")));
-        //assert_eq!(17, value.price);
+        // After instantiation, let's query the state and confirm it
+        // returns what we passed to Instantiate.
+        let response = from_binary::<QueryPriceResponse>(
+            &query(deps.as_ref(), mock_env(), QueryMsg::QueryPrice {}).unwrap(),
+        )
+        .unwrap();
+        assert_eq!(Uint128::from(17u32), response.price);
     }
 
     #[test]
-    fn increment() {}
+    fn test_update_price() {}
 }
