@@ -16,10 +16,10 @@
             "uluna": 5000000
           }
         },
-        "instantiateMsg":{ 
+        "instantiateMsg": {
           "decimals": 6,
           "initial_balances": [{ "address": "terra18yfx9skmexwxvpxal6wtc5unjvcc68xtgl0l56", "amount":"1000000000000" }],
-          "name": "Lemon Token", 
+          "name": "Lemon Token",
           "symbol": "LMON",
           "mint": { "minter": "terra18yfx9skmexwxvpxal6wtc5unjvcc68xtgl0l56", "cap":"1000000000000000" }
       }
