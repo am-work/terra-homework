@@ -17,7 +17,7 @@
             }
           },
           "instantiateMsg": {
-            "price": 46
+            "price": "46"
         }
         }
       }
