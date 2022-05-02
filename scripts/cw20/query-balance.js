@@ -7,7 +7,7 @@ import {
   LCDClient,
 } from "@terra-money/terra.js";
 
-const cw20Contract = "terra1hpajld8zs93md8zrs6sfy42zl0khqpmr07muw0";
+const cw20Contract = "terra1w3tqfpu9aucjvn9mz99ln5m2up754xj2ef5d6u";
 const walletAddress = wallets.wallet1.key.accAddress;
 
 const response = await client.wasm.contractQuery(
